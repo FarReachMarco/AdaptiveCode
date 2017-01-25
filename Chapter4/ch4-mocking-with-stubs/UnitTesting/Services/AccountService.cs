@@ -13,15 +13,16 @@ namespace Services
     {
         public AccountService(IAccountRepository repository)
         {
-            this.repository = repository;
+            if (repository == null)
+                throw new ArgumentNullException(nameof(repository), "Must supply a valida Account Repository");
+            this._repository = repository;
         }
 
         public void AddTransactionToAccount(string uniqueAccountName, decimal transactionAmount)
         {
-            var account = repository.GetByName(uniqueAccountName);
-            account.AddTransaction(transactionAmount);
+            _repository.GetByName(uniqueAccountName)?.AddTransaction(transactionAmount);
         }
 
-        private readonly IAccountRepository repository;
+        private readonly IAccountRepository _repository;
     }
 }

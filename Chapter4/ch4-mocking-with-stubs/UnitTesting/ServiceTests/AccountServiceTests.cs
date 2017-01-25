@@ -29,5 +29,21 @@ namespace ServiceTests
             // Assert
             account.Verify();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CannotCreateAccountServiceWithNullAccountRepository()
+        {
+            var accountService = new AccountService(null);
+        }
+
+        [TestMethod]
+        public void DoNotThrowExceptionWhenAccountIsNotFound()
+        {
+            var mockRepository = new Mock<IAccountRepository>();
+            var sut = new AccountService(mockRepository.Object);
+
+            sut.AddTransactionToAccount("Trading Account", 100);
+        }
     }
 }
