@@ -27,6 +27,25 @@ namespace Domain
 
         protected abstract int CalculateRewardPoints(decimal amount);
 
-      
+        public static AccountBase CreateAccount(AccountType accountType)
+        {
+            AccountBase accountBase = null;
+            switch (accountType)
+            {
+                case AccountType.Silver:
+                    accountBase = new SilverAccount();
+                    break;
+                case AccountType.Gold:
+                    accountBase = new GoldAccount();
+                    break;
+                case AccountType.Platinum:
+                    accountBase = new PlatinumAccount();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(accountType), accountType, null);
+            }
+            return accountBase;
+
+        }
     }
 }
