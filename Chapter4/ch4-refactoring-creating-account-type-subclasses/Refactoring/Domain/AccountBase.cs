@@ -8,16 +8,15 @@ namespace Domain
 {
     public abstract class AccountBase
     {
-        public decimal Balance
+        protected decimal Balance
         {
             get;
             private set;
         }
 
-        public int RewardPoints
+        private int RewardPoints
         {
-            get;
-            private set;
+            get; set;
         }
 
         public void AddTransaction(decimal amount)
@@ -26,6 +25,8 @@ namespace Domain
             Balance += amount;
         }
 
-        public abstract int CalculateRewardPoints(decimal amount);
+        protected abstract int CalculateRewardPoints(decimal amount);
+
+      
     }
 }

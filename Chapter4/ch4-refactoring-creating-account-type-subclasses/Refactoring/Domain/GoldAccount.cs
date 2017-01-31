@@ -8,7 +8,7 @@ namespace Domain
 {
     public class GoldAccount : AccountBase
     {
-        public override int CalculateRewardPoints(decimal amount)
+        protected override int CalculateRewardPoints(decimal amount)
         {
             return Math.Max((int)decimal.Floor((Balance / GoldBalanceCostPerPoint) + (amount / GoldTransactionCostPerPoint)), 0);
         }

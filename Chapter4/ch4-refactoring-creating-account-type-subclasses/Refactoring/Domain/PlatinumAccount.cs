@@ -8,7 +8,7 @@ namespace Domain
 {
     public class PlatinumAccount : AccountBase
     {
-        public override int CalculateRewardPoints(decimal amount)
+        protected override int CalculateRewardPoints(decimal amount)
         {
             return Math.Max((int)decimal.Ceiling((Balance / PlatinumBalanceCostPerPoint) + (amount / PlatinumTransactionCostPerPoint)), 0);
         }

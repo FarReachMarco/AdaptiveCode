@@ -8,7 +8,7 @@ namespace Domain
 {
     public class SilverAccount : AccountBase
     {
-        public override int CalculateRewardPoints(decimal amount)
+        protected override int CalculateRewardPoints(decimal amount)
         {
             return Math.Max((int)decimal.Floor(amount / SilverTransactionCostPerPoint), 0);
         }
