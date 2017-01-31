@@ -37,13 +37,13 @@ namespace Domain
             switch(type)
             {
                 case AccountType.Silver:
-                    points = (int)decimal.Floor(amount / 10);
+                    points = (int)decimal.Floor(amount / SilveTransactionCostPerPoint);
                     break;
                 case AccountType.Gold:
-                    points = (int)decimal.Floor((Balance / 10000 * 5) + (amount / 5));
+                    points = (int)decimal.Floor((Balance / GoldTransactionCostPerPoint) + (amount / GoldTransactionCostPerPoint));
                     break;
                 case AccountType.Platinum:
-                    points = (int)decimal.Ceiling((Balance / 10000 * 10) + (amount / 2));
+                    points = (int)decimal.Ceiling((Balance / PlatinumTransactionCostPerPoint) + (amount / PlatinumTransactionCostPerPoint));
                     break;
                 default:
                     points = 1;
@@ -51,6 +51,13 @@ namespace Domain
             }
             return Math.Max(points, 0);
         }
+
+        private const int SilveTransactionCostPerPoint = 10;
+        private const int GoldTransactionCostPerPoint = 5;
+        private const int PlatinumTransactionCostPerPoint = 2;
+
+        private const int GoldBalanceCostPerPoint = 2000;
+        private const int PlatinumBalanceCostPerPoint = 1000;
 
         private readonly AccountType type;
     }
